@@ -1,0 +1,388 @@
+JAVASCRIPT TYPES
+-----------------
+1. Number 
+2. String - Text that can be in "" or ''. Use \ to add a qoute in text that is printable 
+3. Boolean - True or False
+4. Undefined - The varible is left open
+5. Null = lack of something
+6. Symbol (new in ECMAScript 6) - let sym1 = Symbol('foo'); --> this makes sure that there is a single obj properties so there is no overlap between.
+7. Object 
+
+JAVASCRIPT COMPARISONS
+-----------------
+
+!== - does not equal
+=== - comparing two things 
+>=
+<=
+>
+<
+
+JAVASCRIPT VARIABLES EC5/6 Below
+-----------------
+var - cannot have a number as a name and cannot start with a symbol. Make sure to start doing camelcase (firstName and lastName etc.)
+let (new in ECMAScript 6) - only way to access is inside the thing that you make it (the scope)
+const (new in ECMAScript 6) - Not allowed to resign the varible. Makes bugs less likely to happen.
+DESTRUCTING - You can assign things from an object to a varible in smaller lines (Example below):
+    const obj = {
+        player: "Bobby",
+        experience: 100,
+        wizardLevel: true;
+    }
+    const { player, experience } = obj;
+    let { wizardLevel } = obj;
+
+Object properties - dyanmic property values for objects
+const a = "Simon"
+const b = true
+const c = "Smith"
+
+const obj = {a , b , c} 
+
+Template Strings - (using the above. You can call objects or const using the `` and ${item} method. Makes writing much easier)
+const greetingBest = `hello ${obj.a} ${obj.c} you look great today`;
+
+Default arguments - can have arguments inside that display regardless of it getting passed parameters. However, you can add things inside the function to display 
+example below and greet("Andrew", 40, "Dog") will give Hello Andrew, you seem to be 40. Your pet Dog is amazing!
+function greet(name = '', age=30, pet='cat') {
+    return `Hello ${name}, you seem to be ${age}. Your pet ${pet} is amazing!`;
+}
+
+arrow functions - const add = (a, b) => a + b; -- New way of writing a function. assumes you want to return a + b;
+same as function add(a , b) { return a + b;}
+
+
+JAVASCRIPT CONDITIONALS 0 === false and 1 === true
+-----------------
+if 
+else
+else if
+ternary operator: condition ? exp1 : exp2 ; --> nicer way of doing a if else statement. 
+switch : switch (argument) { case "forward": whatHappens = "you encounter a monster" break; case "back": whatHappens = "" break; ... }
+
+
+JAVASCRIPT LOGICAL OPERATORS
+-----------------
+&& - and operator
+|| - can take in multiple vars to pass through statement. or statement.
+! - not (opposite) statement meaning that if this is the opposite than run the code. 
+
+JAVASCRIPT FUNCTIONS - 
+-----------------
+var a = function name() {}
+function name() {}
+return
+() => (new in ECMAScript 6) --> see arrow functions above.
+ADVANCED
+ - Closures remember the parent's scope so you can use those variables however the parent does not have access to child's variables. 
+ - Currying example - const curriedMultiply = (a) => (b) => a * b; curriedMultiply(2)(5) = 10; -- carrys two parameters
+ - Compose example - you go inside to outsite 
+
+    const compose = (f, g) => (a) => f(g(a))
+    const sum = (num) => sum + 1
+
+    compose(sum, sum)(5) > f(g(a)) ==> (5+1)+1
+
+JAVASCRIPT DATA STRUCTURES
+-----------------
+Array - can hold booleans, FUNCTIONS, numbers, and strings
+Object - have properties and values stored into the different objects. you can embed arrays/FUNCTIONS into it
+
+ADVANCED
+forEach update method - can have more code that is complex. Use map for things that are easier functions. 
+    const array = [1, 4 , 5, 10];
+
+    const double = [];
+    const newArray = array.forEach(num => double.push = (num * 2));
+    
+
+//map, filter, reduce 
+map - example below - does the same as the above but smaller and easier to code. better for simple code that is doing one thing. Better for purity. 
+    const mapArray = array.map(num => num * 2); short hand since this says return for the num*2 
+
+filter - example below - will only add to the array if the argument is met. 
+    const filterArray = array.filter(num => num > 5);
+
+reduce - can do both map/filter - will mostly see accumulator or acc (can be anything that can be passed into the function to manipulate it). Will add up the array
+    const reduceArray = array.reduce(accumulator, num => (accumulator + num) {
+        return accumulator + num;
+    }, accumulator starter number);
+
+JAVASCRIPT LOOPING
+-----------------
+for
+while
+do 
+forEach (new in ECMAScript 5) - takes an array and prints out an index that is simplifed more. You can use the code in more sections.
+
+ADVANCED LOOPING - 
+assume const basket = ['apples', 'oranges', 'grapes']
+
+for of (combining for and forEach type loops. cannot be used for objects)
+for (item of basket) {
+    console.log(item); //allows you to iterate over the array (one by one)
+};
+
+for in (this is for objects to see the properties) NOT iterating. Enumerating is for object.
+however it will work through an object if you wanted it to. 
+const detailBasket = {
+    apples: 5,
+    oranges: 15,
+    grapes: 1000
+};
+
+for (item in detailBasket) {
+    console.log(item); 
+}
+
+JAVASCRIPT ADVANCED OBJECTS
+-----------------
+reference type - each object in java script holds a different part of the memory. although another array may have the SAME data, it will not === to the other array
+with the same data. only way to make the array1 = [1]; === array2 = [1]; is to tell JS array1 === array2. anything that happens to array1 moving forward will update
+array2. 
+
+context vs scope - 
+scope - watch for parents and children in functions and calling variables outside functions they were made in.
+this === the window object console.log(this) and this.alert(); does the same as alert();
+
+instantiation - multiple copys of an object to steamline code 
+class Player {
+    constructor(name, type) {
+        this.name = name; 
+        this.type = type;
+    }
+    introduce() {
+        console.log(`Hi I am ${this.name}, I am a ${this.type}`);
+    }
+};
+
+below is adding on top of what Player has and add the constructor and super to it
+
+class Wizard extends Player {
+    constructor(name, type) {
+        super(name, type);
+    }
+    play() {
+        console.log(`Hi I am ${this.type}!`);
+    }
+}
+
+const wizard1 = new Wizard("Shelly", "Healer");
+const wizard2 = new Wizard("Andy", "Dark Magic");
+
+Advanced Object/array properties
+Pass By Value - two things do not really know about eachother (primative value) ONLY copying the value and not the object itself
+Pass by Reference - if you set two objects to eachother and update one aspect it will update the other (occupy the same memory)
+    let ob1 = { name: "Andrew"};
+    let obj2 = ob1;
+    if I update obj2... obj1 will change also because it is pass by reference
+    obj2.name = "Drew";
+    obj1 now equals to name: "Drew" because it has updated the memory since obj2 = obj1
+
+you can use conncat to clone an array and make it's own memory. however with objects it is more complicated and you have to use Object.assign({}, objname)
+OR let clone = {...objname} --> New feature but need to watch for objects within objects when cloaning and will need help with JSON for super cloaning. 
+DEEP CLOANING let superClown = JSON.parse(JSON.stringify(objname)); be careful because this can have preformance implications for large sets of data. 
+
+
+TYPE COERCION BREIF (all langauges have this)
+-----------------
+operance (things to left and right of ==) will be converted to value
+1 == '1' (int and string) will give true but === will give false (do this to coerce it into not auto correcting);
+
+object.is works the same as === but adds another layer for +0 and -0 and NaN 
+
+ES7 additions
+-----------------
+.includes() can be used to give a bool if something is in a data structure. 
+const pets = ["cats", "dog"];
+pets.includes("cats"); == true 
+
+Expontal operator => ** will do a power (exp.) const square = (x) => x**2; square(5) = 25. 
+
+
+ES8 additions
+-----------------
+.padstart and .padend for moving stuff
+
+,
+you can add a , at the end of a list to make it valid and not give out an error. 
+const fun = (a, b, c, d, e, ) That space at the end after the , allows use to use the fucntion without all the parameters
+fun(1) will return
+
+Object.values and Object.entries
+Examples below
+let obj = {
+    usernanme0 = "Andrew",
+    username1 = "John"
+}
+
+Object.values(obj).forEach(value => {
+    console.log(value);
+}) gives the value of each value in the obj 
+
+Object.entries(obj).forEach(value => {
+    console.log(value);
+}) This gives a 2D array that has both the data item and the value inside (good if you want to include keys); 
+
+Object.entries(obj).map(value => {
+    return value[1] + value[0].replace("username", "");
+}) This will loop through the array and replace username with an emtpy string and return our names with 1 at the end of them.
+
+async/await -
+
+ES10 (flat,flatMap, forEntries, try/catch)
+-----------------
+.flat() - for arrays with nested arrays and turns them into an unnested array
+const array = [1, [2, 3], [4, [5]]] -> 
+array.flat(); 1-4 will be one array but 5 will be a nested array one level up
+flat(num) - num tells the function how deep we want to flatten if we do not know how deep the array goes you can just throw in a number
+We can also clean up our data as it will get rid of empty spaces!
+
+.flatMap() - does both the flat and Map function to go through an array
+const array1 = array.flatMap(num => num + 5); - this will make a new array and manipulate the array we made above by adding 5.
+
+correcting data points
+userEmail1 = '         andrew@email.com'
+userEmail2 = 'andrew@email.com         '
+empty spaces above can be corrected using the below:
+console.log(userEmail1.trimStart());
+console.log(userEmail2.trimEnd());
+
+formEntries - convert arrays to an object
+userProfiles = [['commanderTim', 23] , ["DerekZander", 40] , ['hansel' , 18]];
+Object.fromEntries(userProfiles); - Remember from ES8 that was Entries that does the opposite;
+
+try/catch - allow us to try code and catch errors if they happen
+try {
+    4 + 5 //--> any errors here? It will move to catch the error
+    } catch (some sort of error that prints if you want) {
+    console.log('something went wrong');
+    }
+};
+
+ES2020
+-----------------
+BigInt (big integer). This is an update to using Max_Safe_Integer and getting errors
+add n after a number 1n, 100n, etc. you can add n to have calculations start working again
+
+Nullish - old way of calling things below ??
+optional chaining ?
+let will_poke = {
+    carazard: {
+        species : 'dragon',
+        height: 0.5,
+        weight: 6
+    }
+}
+let andrew_poke = {
+    carmander: {
+        species : 'dragon',
+        height: 0.1,
+        weight: 3,
+        power: 'fire'
+    }
+}
+
+let weight = will_poke.carazard.weight;
+console.log('weight:', weight);
+
+let weight2 = andrew_poke.carmander.weight;
+console.log('weight:', weight2);
+
+let weight3 = andrew_poke?.carazard?.weight //this is a if statementway to do the above and check if the thing is there.
+
+let power = andrew_poke?.carazard?.power // 'no power'; - // =or this is saying to check if there is a power 
+if you want to only check if the thing is null or Undefined you can use ?? instead of //
+
+ES2021
+-----------------
+new string function.
+const str = "ZTM is the best";
+
+str.replaceAll('best' , 'worst'); - this will replace the string. Kind of like a replace and find.
+
+Debugging Tips
+----------------
+
+debugger is a key word that stops the program and go through it and read it
+
+how does Javascript work Video
+----------------
+The engine is two parts:
+Memory heap and the call stack
+Memory heap = allocating memory for our code. We have a limited amount which could lead to memory leaks. 
+call stack = does the code in order of executing and moves on to the next one
+
+Javascript is a single threaded langauge that is nonblocking (single threaded langauge)
+The nice thing that JavaScript gives is that you have one thing does. 
+JavaScript is a SYNCRONUS langauge. You can do processing with Async JS features to aviod waiting.
+
+stack overfull means that the stack is overflowing with requests to be run. functions that call themselves causes
+recursions and with no end in sight for a function it can over full 
+
+function foo (){
+    foo();
+}
+foo();
+
+Javascript run time envrioment that allows web APIs, callback queues, and Event Loops inside browsers
+
+
+
+JAVASCRIPT KEYWORDS
+-----------------
+break
+case
+catch
+class
+const
+continue
+debugger
+default
+delete
+do
+else
+export
+extends
+finally
+for
+function
+if
+import
+in
+instanceof
+new
+return
+super
+switch
+this
+throw
+try
+typeof
+var
+void
+while
+with
+yield
+
+
+function moveCommand(direction) {
+    var whatHappens;
+    switch (direction) {
+        case "forward":
+            whatHappens = "You encounter a monster";
+            break;
+        case "back":
+            whatHappens = "You encounter a home";
+            break;
+        case "right":
+            whatHappens = "You encounter a river";
+            break;
+        case "left":
+            whatHappens = "You encounter a troll";
+            break;
+        default:
+            whatHappens = "please enter a valid direction";
+    }
+    return whatHappens;
+};
